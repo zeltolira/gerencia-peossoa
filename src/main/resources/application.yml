@@ -1,0 +1,20 @@
+server:
+  servlet:
+    context-path: /gerencia/api
+
+springdoc:
+  swagger-ui:
+    path: /public/swagger
+
+spring.jpa.database: POSTGRESQL
+spring.datasource.driver-class-name: org.postgresql.Driver
+spring.datasource.url: jdbc:postgresql://localhost:5433/gerencia-pessoa
+spring.datasource.username: postgres
+spring.datasource.password: admin
+spring.jpa.show-sql: true
+spring.jpa.hibernate.ddl-auto: update
+spring.jpa.yml.hibernate.jdbc.lob.non_contextual_creation: true
+spring:
+  sql:
+    init:
+      platform: postgres
