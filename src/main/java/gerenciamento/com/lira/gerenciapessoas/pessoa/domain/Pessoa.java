@@ -1,5 +1,6 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.domain;
 
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -28,4 +30,12 @@ public class Pessoa {
     private Sexo sexo;
     @NotBlank(message = "Campo obrigatório!")
     private String dataNascimento;
+    private LocalDateTime dataCriacao;
+
+    public Pessoa(PessoaRequest pessoaRequest) {
+        this.nomePessoa = pessoaRequest.getNomePessoa();
+        this.sexo = pessoaRequest.getSexo();
+        this.dataNascimento = pessoaRequest.getDataNascimento();
+        this.dataCriacao = LocalDateTime.now();
+    }
 }

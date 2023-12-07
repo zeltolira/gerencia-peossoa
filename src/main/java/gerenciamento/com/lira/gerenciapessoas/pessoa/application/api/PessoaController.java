@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 @RequiredArgsConstructor
 public class PessoaController implements PessoaAPI {
-    private PessoaService pessoaService;
+    private final PessoaService pessoaService;
 
     @Override
     public PessoaResponse postPessoa(PessoaRequest pessoaRequest) {
