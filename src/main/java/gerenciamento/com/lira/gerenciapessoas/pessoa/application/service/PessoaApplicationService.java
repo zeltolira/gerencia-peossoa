@@ -1,12 +1,15 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.service;
 
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository.PessoaRepository;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Log4j2
@@ -20,5 +23,13 @@ public class PessoaApplicationService implements PessoaService {
        Pessoa pessoa = pessoaRepository.savePessoa(new Pessoa(pessoaRequest));
        log.info("[finish] PessoaApplicationService - postPessoa");
         return new PessoaResponse(pessoa);
+    }
+
+    @Override
+    public List<PessoaListResponse> getAllPessoas() {
+       log.info("[start] PessoaApplicationService - getAllPessoas");
+       List<Pessoa> pessoas = pessoaRepository.getAllPessoas();
+       log.info("[finish] PessoaApplicationService - getAllPessoas");
+        return PessoaListResponse.converte(pessoas);
     }
 }

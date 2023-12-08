@@ -1,11 +1,14 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api;
 
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.service.PessoaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @Log4j2
@@ -19,5 +22,13 @@ public class PessoaController implements PessoaAPI {
         PessoaResponse pessoaCriada = pessoaService.postPessoa(pessoaRequest);
         log.info("[finish] PessoaController - postPessoa");
         return pessoaCriada;
+    }
+
+    @Override
+    public List<PessoaListResponse> getAllPessoas() {
+        log.info("[start] PessoaController - getTodasPessoas");
+        List<PessoaListResponse> pessoas = pessoaService.getAllPessoas();
+        log.info("[finish] PessoaController - getTodasPessoas");
+        return pessoas;
     }
 }
