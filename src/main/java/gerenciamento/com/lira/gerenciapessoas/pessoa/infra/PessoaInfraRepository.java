@@ -1,14 +1,15 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.infra;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository.PessoaRepository;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.antlr.v4.runtime.misc.LogManager;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @Log4j2
@@ -26,8 +27,18 @@ public class PessoaInfraRepository implements PessoaRepository {
 
     @Override
     public List<Pessoa> getAllPessoas() {
-        log.info("[start] PessoaInfraRepository - savePessoa");
+        log.info("[start] PessoaInfraRepository - getAllPessoa");
         List<Pessoa> allPessoas = pessoaSpringDataJPARepository.findAll();
+        log.info("[finish] PessoaInfraRepository - getAllPessoa");
         return allPessoas;
+    }
+
+    @Override
+    public Pessoa getPessoaById(UUID idPessoa) {
+        log.info("[start] PessoaInfraRepository - getPessoaById");
+        Pessoa pessoa = pessoaSpringDataJPARepository.findById(idPessoa)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
+        log.info("[finish] PessoaInfraRepository - getPessoaById");
+        return pessoa;
     }
 }

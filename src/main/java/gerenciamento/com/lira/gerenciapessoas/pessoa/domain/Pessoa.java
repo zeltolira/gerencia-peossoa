@@ -1,5 +1,6 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.domain;
 
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +32,7 @@ public class Pessoa {
     @NotBlank(message = "Campo obrigatório!")
     private String dataNascimento;
     private LocalDateTime dataCriacao;
+    private LocalDateTime dataHoraUltimaAlteracao;
 
     public Pessoa(PessoaRequest pessoaRequest) {
         this.nomePessoa = pessoaRequest.getNomePessoa();
@@ -38,4 +40,12 @@ public class Pessoa {
         this.dataNascimento = pessoaRequest.getDataNascimento();
         this.dataCriacao = LocalDateTime.now();
     }
+
+    public void patchPessoa(PessoaPatchRequest pessoaPatchRequest) {
+        this.nomePessoa = pessoaPatchRequest.getNomePessoa();
+        this.sexo = pessoaPatchRequest.getSexo();
+        this.dataNascimento = pessoaPatchRequest.getDataNascimento();
+        this.dataHoraUltimaAlteracao = LocalDateTime.now();
+    }
+
 }

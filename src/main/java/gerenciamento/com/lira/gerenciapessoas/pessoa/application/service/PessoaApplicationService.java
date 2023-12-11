@@ -1,6 +1,8 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.service;
 
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaDetalhadoResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository.PessoaRepository;
@@ -10,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Log4j2
@@ -31,5 +34,22 @@ public class PessoaApplicationService implements PessoaService {
        List<Pessoa> pessoas = pessoaRepository.getAllPessoas();
        log.info("[finish] PessoaApplicationService - getAllPessoas");
         return PessoaListResponse.converte(pessoas);
+    }
+
+    @Override
+    public PessoaDetalhadoResponse getPessoaById(UUID idPessoa) {
+        log.info("[start] PessoaApplicationService - getPessoaById");
+        Pessoa pessoa = pessoaRepository.getPessoaById(idPessoa);
+        log.info("[finish] PessoaApplicationService - getPessoaById");
+        return new PessoaDetalhadoResponse(pessoa);
+    }
+
+    @Override
+    public void patchPessoaById(UUID idPessoa, PessoaPatchRequest pessoaPatchRequest) {
+        log.info("[start] PessoaApplicationService - patchPessoaById");
+        Pessoa pessoa = pessoaRepository.getPessoaById(idPessoa);
+        pessoa.patchPessoa(pessoaPatchRequest);
+        pessoaRepository.savePessoa(pessoa);
+        log.info("[finish] PessoaApplicationService - patchPessoaById");
     }
 }

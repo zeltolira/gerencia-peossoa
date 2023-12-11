@@ -1,6 +1,8 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api;
 
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaDetalhadoResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.service.PessoaService;
@@ -9,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Log4j2
@@ -30,5 +33,21 @@ public class PessoaController implements PessoaAPI {
         List<PessoaListResponse> pessoas = pessoaService.getAllPessoas();
         log.info("[finish] PessoaController - getTodasPessoas");
         return pessoas;
+    }
+
+    @Override
+    public PessoaDetalhadoResponse getPessoaById(UUID idPessoa) {
+        log.info("[start] PessoaController - getPessoaById");
+        PessoaDetalhadoResponse pessoaDetalhada = pessoaService.getPessoaById(idPessoa);
+        log.info("[finish] PessoaController - getPessoaById");
+        return pessoaDetalhada;
+    }
+
+    @Override
+    public void patchPessoaById(UUID idPessoa, PessoaPatchRequest pessoaPatchRequest) {
+        log.info("[start] PessoaController - patchPessoaById");
+        log.info("[idPessoa] {}", idPessoa);
+        pessoaService.patchPessoaById(idPessoa, pessoaPatchRequest);
+        log.info("[finish] PessoaController - patchPessoaById");
     }
 }
