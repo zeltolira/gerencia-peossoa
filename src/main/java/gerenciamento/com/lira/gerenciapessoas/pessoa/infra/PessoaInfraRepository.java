@@ -1,5 +1,6 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.infra;
 
+import gerenciamento.com.lira.gerenciapessoas.handler.APIException;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository.PessoaRepository;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class PessoaInfraRepository implements PessoaRepository {
     public Pessoa getPessoaById(UUID idPessoa) {
         log.info("[start] PessoaInfraRepository - getPessoaById");
         Pessoa pessoa = pessoaSpringDataJPARepository.findById(idPessoa)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
+                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
         log.info("[finish] PessoaInfraRepository - getPessoaById");
         return pessoa;
     }
