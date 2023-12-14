@@ -5,7 +5,6 @@ import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

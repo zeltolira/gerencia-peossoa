@@ -26,6 +26,7 @@ public class EnderecoApplicationService implements EnderecoService {
         log.info("[start] EnderecoApplicationService - postoEndereco");
         Pessoa pessoa = pessoaRepository.getPessoaById(idPessoa);
         Endereco endereco = enderecoRepository.saveEndereco(new Endereco(enderecoRequestRequest));
+        endereco.tornarPrincipal();
         log.info("[finish] EnderecoApplicationService - postoEndereco");
         return new EnderecoResponse(endereco);
     }

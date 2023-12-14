@@ -39,7 +39,7 @@ public class PessoaApplicationService implements PessoaService {
     @Override
     public PessoaDetalhadoResponse getPessoaById(UUID idPessoa) {
         log.info("[start] PessoaApplicationService - getPessoaById");
-        Pessoa pessoa = pessoaRepository.getPessoaById(idPessoa);
+        Pessoa pessoa = (Pessoa) pessoaRepository.getPessoaById(idPessoa);
         log.info("[finish] PessoaApplicationService - getPessoaById");
         return new PessoaDetalhadoResponse(pessoa);
     }

@@ -9,9 +9,9 @@ import java.util.UUID;
 @Getter
 @ToString
 public class EnderecoResponse {
-    private UUID idEnderco;
+    private UUID idEndereco;
 
     public EnderecoResponse(Endereco endereco) {
-        this.idEnderco = endereco.getIdEnderco();
+        this.idEndereco = endereco.getIdEndereco();
     }
 }

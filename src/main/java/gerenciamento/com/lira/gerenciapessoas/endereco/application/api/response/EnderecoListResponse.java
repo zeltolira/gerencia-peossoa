@@ -4,16 +4,17 @@ import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.Value;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Value
 @Getter
 @ToString
 public class EnderecoListResponse {
-    private UUID idEnderco;
-
+    private UUID idEndereco;
     private String cep;
     private String logradouro;
     private String cidade;
@@ -26,7 +27,7 @@ public class EnderecoListResponse {
     }
 
     public EnderecoListResponse(Endereco endereco) {
-        this.idEnderco = endereco.getIdEnderco();
+        this.idEndereco = endereco.getIdEndereco();
         this.cep = endereco.getCep();
         this.logradouro = endereco.getLogradouro();
         this.cidade = endereco.getCidade();
