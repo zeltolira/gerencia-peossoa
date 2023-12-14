@@ -1,6 +1,7 @@
 package gerenciamento.com.lira.gerenciapessoas.endereco.domain;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,6 +26,9 @@ public class Endereco {
     private String cidade;
     private String numero;
 
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
     public Endereco(EnderecoRequest enderecoRequestRequest) {
         this.logradouro = enderecoRequestRequest.getLogradouro();
         this.cidade = enderecoRequestRequest.getCidade();

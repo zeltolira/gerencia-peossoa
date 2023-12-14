@@ -1,5 +1,6 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.domain;
 
+import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
 import jakarta.persistence.*;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +36,8 @@ public class Pessoa {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataHoraUltimaAlteracao;
 
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.REMOVE)
+    private List<Endereco> endereco;
     public Pessoa(PessoaRequest pessoaRequest) {
         this.nomePessoa = pessoaRequest.getNomePessoa();
         this.sexo = pessoaRequest.getSexo();

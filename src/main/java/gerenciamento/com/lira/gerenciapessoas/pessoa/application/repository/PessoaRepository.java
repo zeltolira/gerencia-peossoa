@@ -10,4 +10,5 @@ public interface PessoaRepository {
     Pessoa savePessoa(Pessoa pessoa);
     List<Pessoa> getAllPessoas();
     Pessoa getPessoaById(UUID idPessoa);
+
 }
