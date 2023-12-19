@@ -4,6 +4,7 @@ import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface EnderecoRepository {
     Endereco saveEndereco(Endereco endereco);

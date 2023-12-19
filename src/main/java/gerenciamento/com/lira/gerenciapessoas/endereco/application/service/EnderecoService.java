@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EnderecoService {
-    EnderecoResponse postEndereco(UUID idPessoa, EnderecoRequest enderecoRequestRequest);
+    EnderecoResponse postEndereco(UUID idPessoa, EnderecoRequest enderecoRequest);
     List<EnderecoListResponse> getEnderecoPessoa(UUID idPessoa);
 }

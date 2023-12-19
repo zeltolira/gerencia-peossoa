@@ -19,6 +19,7 @@ public class EnderecoListResponse {
     private String logradouro;
     private String cidade;
     private String numero;
+    private boolean pricnipal;
 
     public static List<EnderecoListResponse> converte(List<Endereco> endereco) {
         return endereco.stream()
@@ -32,5 +33,6 @@ public class EnderecoListResponse {
         this.logradouro = endereco.getLogradouro();
         this.cidade = endereco.getCidade();
         this.numero = endereco.getNumero();
+        this.pricnipal = endereco.isPrincipal();
     }
 }

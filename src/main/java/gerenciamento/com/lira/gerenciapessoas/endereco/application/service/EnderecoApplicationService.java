@@ -22,11 +22,10 @@ public class EnderecoApplicationService implements EnderecoService {
     private final PessoaRepository pessoaRepository;
 
     @Override
-    public EnderecoResponse postEndereco(UUID idPessoa, EnderecoRequest enderecoRequestRequest) {
+    public EnderecoResponse postEndereco(UUID idPessoa, EnderecoRequest enderecoRequest) {
         log.info("[start] EnderecoApplicationService - postoEndereco");
         Pessoa pessoa = pessoaRepository.getPessoaById(idPessoa);
-        Endereco endereco = enderecoRepository.saveEndereco(new Endereco(enderecoRequestRequest));
-        endereco.tornarPrincipal();
+        Endereco endereco = enderecoRepository.saveEndereco(new Endereco(pessoa, enderecoRequest));
         log.info("[finish] EnderecoApplicationService - postoEndereco");
         return new EnderecoResponse(endereco);
     }

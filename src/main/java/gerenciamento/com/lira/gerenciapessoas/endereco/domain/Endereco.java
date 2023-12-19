@@ -5,6 +5,7 @@ import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,21 +27,22 @@ public class Endereco {
     @Setter
     private boolean principal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
     
-    public Endereco(EnderecoRequest enderecoRequestRequest, boolean principal) {
-        this.logradouro = enderecoRequestRequest.getLogradouro();
-        this.cidade = enderecoRequestRequest.getCidade();
-        this.numero = enderecoRequestRequest.getNumero();
-        this.principal = principal;
-    }
 
-    public Endereco(EnderecoRequest enderecoRequestRequest) {
-        this.logradouro = enderecoRequestRequest.getLogradouro();
-        this.cidade = enderecoRequestRequest.getCidade();
-        this.numero = enderecoRequestRequest.getNumero();
+    public Endereco(Pessoa pessoa, EnderecoRequest enderecoRequest) {
+        this.cep = enderecoRequest.getCep();
+        this.logradouro = enderecoRequest.getLogradouro();
+        this.cidade = enderecoRequest.getCidade();
+        this.numero = enderecoRequest.getNumero();
+        this.pessoa = pessoa;
+        validarEndereco(enderecoRequest);
+        if (enderecoJaCadastrado(pessoa, enderecoRequest)) {
+            throw new RuntimeException("Endereço já cadastrado para esta pessoa.");
+        }
+        tornarPrincipal();
     }
 
     public void tornarPrincipal() {
@@ -50,5 +52,25 @@ public class Endereco {
                     .filter(endereco -> !endereco.equals(this))
                     .forEach(endereco -> endereco.setPrincipal(false));
         }
+    }
+    private void validarEndereco(EnderecoRequest enderecoRequest) {
+        if (enderecoRequest.getCep() == null || enderecoRequest.getCep().isEmpty()){
+            throw new RuntimeException("CEP é um campo obrigatório");
+        }
+    }
+    private boolean enderecoJaCadastrado(Pessoa pessoa, EnderecoRequest enderecoRequest) {
+        List<Endereco> enderecosCadastrados = pessoa.getEndereco();
+        for (Endereco endereco : enderecosCadastrados) {
+            if (saoEnderecosIguais(endereco, enderecoRequest)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private boolean saoEnderecosIguais(Endereco endereco, EnderecoRequest enderecoRequest) {
+        return  endereco.getCep().equals(enderecoRequest.getCep())
+                && endereco.getNumero().equals(enderecoRequest.getNumero());
     }
 }

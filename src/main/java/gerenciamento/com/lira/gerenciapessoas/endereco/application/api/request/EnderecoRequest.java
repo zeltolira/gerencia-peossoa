@@ -9,6 +9,7 @@ import java.util.UUID;
 @ToString
 public class EnderecoRequest {
     private UUID idPessoa;
+    private String cep;
     private String logradouro;
     private String cidade;
     private String numero;
