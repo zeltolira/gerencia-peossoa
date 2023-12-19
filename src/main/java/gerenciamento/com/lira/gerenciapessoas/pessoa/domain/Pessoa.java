@@ -10,6 +10,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +35,10 @@ public class Pessoa {
     private Sexo sexo;
     @NotBlank(message = "Campo obrigatório!")
     private String dataNascimento;
+    @NotBlank(message = "Campo obrigatório!")
+    @CPF(message = "CPF inválido")
+    @Column(unique = true)
+    private String cpf;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataHoraUltimaAlteracao;
 
@@ -43,13 +49,24 @@ public class Pessoa {
         this.sexo = pessoaRequest.getSexo();
         this.dataNascimento = pessoaRequest.getDataNascimento();
         this.dataCriacao = LocalDateTime.now();
+        this.cpf = pessoaRequest.getCpf();
+        validarCPF(pessoaRequest.getCpf());
     }
+
 
     public void patchPessoa(PessoaPatchRequest pessoaPatchRequest) {
         this.nomePessoa = pessoaPatchRequest.getNomePessoa();
         this.sexo = pessoaPatchRequest.getSexo();
         this.dataNascimento = pessoaPatchRequest.getDataNascimento();
+        this.cpf = pessoaPatchRequest.getCpf();
+        validarCPF(pessoaPatchRequest.getCpf());
         this.dataHoraUltimaAlteracao = LocalDateTime.now();
     }
-
+    private void validarCPF(String cpf) {
+        CPFValidator cpfValidator = new CPFValidator();
+        cpfValidator.initialize(null);
+        if (!cpfValidator.isValid(cpf, null)) {
+            throw new IllegalArgumentException("CPF inválido");
+        }
+    }
 }

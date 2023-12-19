@@ -23,9 +23,17 @@ public class PessoaApplicationService implements PessoaService {
     @Override
     public PessoaResponse postPessoa(PessoaRequest pessoaRequest) {
        log.info("[start] PessoaApplicationService - postPessoa");
+        if (cpfJaCadastrado(pessoaRequest.getCpf())) {
+            log.error("CPF já cadastrado: {}", pessoaRequest.getCpf());
+            throw new RuntimeException("CPF já cadastrado");
+        }
        Pessoa pessoa = pessoaRepository.savePessoa(new Pessoa(pessoaRequest));
        log.info("[finish] PessoaApplicationService - postPessoa");
         return new PessoaResponse(pessoa);
+    }
+
+    private boolean cpfJaCadastrado(String cpf) {
+        return pessoaRepository.findByCpf(cpf).isPresent();
     }
 
     @Override

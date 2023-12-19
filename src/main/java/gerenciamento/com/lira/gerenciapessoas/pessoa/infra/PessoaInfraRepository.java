@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -40,6 +41,13 @@ public class PessoaInfraRepository implements PessoaRepository {
         Pessoa pessoa = pessoaSpringDataJPARepository.findById(idPessoa)
                 .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
         log.info("[finish] PessoaInfraRepository - getPessoaById");
+        return pessoa;
+    }
+
+    public Optional<Pessoa> findByCpf(String cpf) {
+        log.info("[start] EnderecoInfraRepository - findByCpf");
+        Optional<Pessoa> pessoa =pessoaSpringDataJPARepository.findByCpf(cpf);
+        log.info("[finish] EnderecoInfraRepository - findByCpf");
         return pessoa;
     }
 }

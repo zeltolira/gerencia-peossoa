@@ -10,4 +10,5 @@ public class PessoaRequest {
     private String nomePessoa;
     private Sexo sexo;
     private String dataNascimento;
+    private String cpf;
 }

@@ -11,4 +11,5 @@ public class PessoaPatchRequest {
     private String nomePessoa;
     private Sexo sexo;
     private String dataNascimento;
+    private String cpf;
 }
