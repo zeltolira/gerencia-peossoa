@@ -1,6 +1,8 @@
 package gerenciamento.com.lira.gerenciapessoas.endereco.application.api;
 
+import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoRequest;
+import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoDetalhadoResponse;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoListResponse;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoResponse;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.service.EnderecoService;
@@ -32,4 +34,29 @@ public class EnderecoController implements EnderecoAPI {
         log.info("[finish] EnderecoController - getAllEndereco");
         return endereco;
     }
+
+    @Override
+    public EnderecoDetalhadoResponse getEnderecoPorId(UUID idPessoa, UUID idEndereco) {
+        log.info("[start] EnderecoController - getEnderecoPorId");
+        EnderecoDetalhadoResponse enderecoDetalhado = enderecoService.getEnderecoByID(idPessoa, idEndereco);
+        log.info("[finish] EnderecoController - getEnderecoPorId");
+        return enderecoDetalhado;
+    }
+
+    @Override
+    public void PatchEndereco(UUID idEndereco, EnderecoPatchRequest enderecoPatchRequest) {
+        log.info("[start] EnderecoController - PatchEndreco");
+        enderecoService.patchEndereco(idEndereco, enderecoPatchRequest);
+        log.info("[finish] EnderecoController - PatchEndreco");
+
+    }
+
+    @Override
+    public void setPrincipal(UUID idPessoa, UUID idEndereco) {
+        log.info("[start] EnderecoController - setPrincipal");
+        enderecoService.setPrincipal(idPessoa,idEndereco);
+        log.info("[finish] EnderecoController - setPrincipal");
+    }
+
+
 }

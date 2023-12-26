@@ -1,4 +1,4 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.domain;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
@@ -42,8 +42,9 @@ public class Pessoa {
     private LocalDateTime dataCriacao;
     private LocalDateTime dataHoraUltimaAlteracao;
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Endereco> endereco;
+
     public Pessoa(PessoaRequest pessoaRequest) {
         this.nomePessoa = pessoaRequest.getNomePessoa();
         this.sexo = pessoaRequest.getSexo();
@@ -66,7 +67,25 @@ public class Pessoa {
         CPFValidator cpfValidator = new CPFValidator();
         cpfValidator.initialize(null);
         if (!cpfValidator.isValid(cpf, null)) {
-            throw new IllegalArgumentException("CPF inválido");
+            throw new RuntimeException("CPF inválido");
         }
     }
+//    public void setEnderecoPrincipal(UUID idEndereco) {
+//        boolean encontrado = false;
+//
+//        for (Endereco endereco : this.endereco) {
+//            if (endereco.getIdEndereco().equals(idEndereco)) {
+//                encontrado = true;
+//                boolean novoStatus = !endereco.isPrincipal();
+//                endereco.setPrincipal(novoStatus);
+//            } else {
+//                endereco.setPrincipal(false);
+//            }
+//        }
+//
+//        if (!encontrado) {
+//            throw new RuntimeException("Endereço não encontrado para o ID fornecido: " + idEndereco);
+//        }
+//    }
+
 }

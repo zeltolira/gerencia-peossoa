@@ -6,7 +6,7 @@ import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.Pe
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository.PessoaRepository;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

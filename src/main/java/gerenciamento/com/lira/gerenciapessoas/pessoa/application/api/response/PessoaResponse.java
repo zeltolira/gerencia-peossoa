@@ -1,6 +1,6 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Pessoa;
 import lombok.Getter;
 import lombok.ToString;
 

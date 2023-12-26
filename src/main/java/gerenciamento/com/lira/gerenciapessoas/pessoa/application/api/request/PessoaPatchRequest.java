@@ -1,10 +1,9 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Sexo;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Sexo;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.UUID;
 @Getter
 @ToString
 public class PessoaPatchRequest {

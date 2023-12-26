@@ -1,6 +1,7 @@
 package gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
+import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Status;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,8 +22,9 @@ public class EnderecoResponse {
     private String cidade;
     @Setter
     private String numero;
-    @Setter
-    private boolean principal;
+    private Status status;
+//    @Setter
+//    private boolean principal;
 
     public EnderecoResponse(Endereco endereco) {
         this.idEndereco = endereco.getIdEndereco();
@@ -30,7 +32,9 @@ public class EnderecoResponse {
         this.logradouro = endereco.getLogradouro();
         this.cidade = endereco.getCidade();
         this.numero = endereco.getNumero();
-        this.principal = endereco.isPrincipal();
+        this.status = endereco.getStatus();
+//        this.status = endereco.getStatus();
+//        this.principal = endereco.isPrincipal();
     }
 
     public static List<EnderecoResponse> converte(List<Endereco> endereco) {
@@ -45,8 +49,8 @@ public class EnderecoResponse {
         enderecoResponse.setLogradouro(endereco.getLogradouro());
         enderecoResponse.setCidade(endereco.getCidade());
         enderecoResponse.setNumero(endereco.getNumero());
-        enderecoResponse.setPrincipal(endereco.isPrincipal());
         return enderecoResponse;
     }
+
 
 }

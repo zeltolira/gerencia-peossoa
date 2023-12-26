@@ -7,6 +7,7 @@ import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.Pe
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,4 +31,5 @@ public interface PessoaAPI {
     @PatchMapping(value = "/{idPessoa}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     void patchPessoaById(@PathVariable UUID idPessoa, @Valid @RequestBody PessoaPatchRequest pessoaPatchRequest);
+
 }
