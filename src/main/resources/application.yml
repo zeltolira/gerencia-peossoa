@@ -1,0 +1,22 @@
+server:
+  servlet:
+    context-path: /gerencia/api
+
+#spring:
+#  datasource:
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/gerencia-pessoa
+#    username: postgres
+#    password: admin
+#  jpa:
+#    generate-ddl: true
+#    properties:
+#      hibernate:
+#        ddl-auto: update
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#    open-in-view: false
+
+springdoc:
+  swagger-ui:
+    path: /public/swagger
+
