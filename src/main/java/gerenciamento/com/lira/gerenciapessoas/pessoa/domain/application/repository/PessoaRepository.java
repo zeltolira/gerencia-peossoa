@@ -1,4 +1,4 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.repository;
 
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 

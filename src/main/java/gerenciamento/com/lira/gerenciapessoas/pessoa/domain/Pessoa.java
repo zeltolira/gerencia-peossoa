@@ -1,8 +1,9 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.domain;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.handler.APIException;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaPatchRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -67,25 +69,7 @@ public class Pessoa {
         CPFValidator cpfValidator = new CPFValidator();
         cpfValidator.initialize(null);
         if (!cpfValidator.isValid(cpf, null)) {
-            throw new RuntimeException("CPF inválido");
+            throw APIException.build(HttpStatus.BAD_REQUEST,"CPF inválido");
         }
     }
-//    public void setEnderecoPrincipal(UUID idEndereco) {
-//        boolean encontrado = false;
-//
-//        for (Endereco endereco : this.endereco) {
-//            if (endereco.getIdEndereco().equals(idEndereco)) {
-//                encontrado = true;
-//                boolean novoStatus = !endereco.isPrincipal();
-//                endereco.setPrincipal(novoStatus);
-//            } else {
-//                endereco.setPrincipal(false);
-//            }
-//        }
-//
-//        if (!encontrado) {
-//            throw new RuntimeException("Endereço não encontrado para o ID fornecido: " + idEndereco);
-//        }
-//    }
-
 }

@@ -44,7 +44,7 @@ public class EnderecoController implements EnderecoAPI {
     }
 
     @Override
-    public void PatchEndereco(UUID idEndereco, EnderecoPatchRequest enderecoPatchRequest) {
+    public void patchEndereco(UUID idEndereco, EnderecoPatchRequest enderecoPatchRequest) {
         log.info("[start] EnderecoController - PatchEndreco");
         enderecoService.patchEndereco(idEndereco, enderecoPatchRequest);
         log.info("[finish] EnderecoController - PatchEndreco");

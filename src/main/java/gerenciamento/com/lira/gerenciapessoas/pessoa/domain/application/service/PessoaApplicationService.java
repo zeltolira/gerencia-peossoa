@@ -1,11 +1,11 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.application.service;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.service;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaDetalhadoResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository.PessoaRepository;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaPatchRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaDetalhadoResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaListResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.repository.PessoaRepository;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

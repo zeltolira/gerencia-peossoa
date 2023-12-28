@@ -2,8 +2,10 @@ package gerenciamento.com.lira.gerenciapessoas.endereco.domain;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoRequest;
+import gerenciamento.com.lira.gerenciapessoas.endereco.application.repository.EnderecoRepository;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +22,7 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "uuid", updatable = false, unique = true, nullable = false)
     private UUID idEndereco;
+    @NotNull
     private String cep;
     private String logradouro;
     private String cidade;
@@ -43,16 +46,14 @@ public class Endereco {
         this.pessoa = pessoa;
         this.dataHoraCadastro = LocalDateTime.now();
         validarEndereco(enderecoRequest);
+    }
+
+    private void validarEndereco(EnderecoRequest enderecoRequest) {
         validaPrincipal();
         if (enderecoJaCadastrado(pessoa, enderecoRequest)) {
             throw new RuntimeException("Endereço já cadastrado para esta pessoa.");
         }
-    }
 
-    private void validarEndereco(EnderecoRequest enderecoRequest) {
-        if (enderecoRequest.getCep() == null || enderecoRequest.getCep().isEmpty()) {
-            throw new RuntimeException("CEP é um campo obrigatório");
-        }
     }
 
     private boolean enderecoJaCadastrado(Pessoa pessoa, EnderecoRequest enderecoRequest) {
@@ -100,12 +101,20 @@ public class Endereco {
         this.dataHoraUltimaAlteracao = LocalDateTime.now();
     }
 
-    public void setStatusPrincipal() {
-        this.status = Status.PRINCIPAL;
-    }
-
     public void setStatusSecundario() {
         this.status = Status.SECUNDARIO;
+    }
+
+    private void verificaSePrincipal(Endereco outroEndereco, EnderecoRepository enderecoRepository) {
+        if (!outroEndereco.equals(this)) {
+            outroEndereco.setStatusSecundario();
+            enderecoRepository.saveEndereco(outroEndereco);
+        }
+    }
+
+    public void setStatusPrincipal(Pessoa pessoa, Endereco endereco, EnderecoRepository enderecoRepository) {
+        pessoa.getEndereco().forEach(outroEndereco -> verificaSePrincipal(outroEndereco, enderecoRepository));
+        this.status = Status.PRINCIPAL;
     }
 }
 

@@ -1,11 +1,11 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaDetalhadoResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.service.PessoaService;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaPatchRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaDetalhadoResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaListResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.service.PessoaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;

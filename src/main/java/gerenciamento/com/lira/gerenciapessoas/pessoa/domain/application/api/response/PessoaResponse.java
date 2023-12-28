@@ -1,4 +1,4 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response;
 
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.Getter;

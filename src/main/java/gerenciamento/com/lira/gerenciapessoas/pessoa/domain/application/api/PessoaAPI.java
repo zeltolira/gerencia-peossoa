@@ -1,13 +1,12 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaDetalhadoResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaListResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.PessoaResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaPatchRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.request.PessoaRequest;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaDetalhadoResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaListResponse;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.api.response.PessoaResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
