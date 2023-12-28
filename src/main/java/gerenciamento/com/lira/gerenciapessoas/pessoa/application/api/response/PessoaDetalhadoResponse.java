@@ -1,8 +1,8 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoResponse;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Pessoa;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Sexo;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Sexo;
 import lombok.Getter;
 import lombok.ToString;
 

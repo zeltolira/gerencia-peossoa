@@ -1,7 +1,7 @@
 package gerenciamento.com.lira.gerenciapessoas.endereco.application.repository;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Pessoa;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,6 +1,6 @@
 package gerenciamento.com.lira.gerenciapessoas.pessoa.application.repository;
 
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Pessoa;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 
 import java.util.List;
 import java.util.Optional;

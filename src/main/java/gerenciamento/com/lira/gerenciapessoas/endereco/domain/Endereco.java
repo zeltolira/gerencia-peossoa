@@ -2,7 +2,7 @@ package gerenciamento.com.lira.gerenciapessoas.endereco.domain;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoRequest;
-import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain.Pessoa;
+import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
 

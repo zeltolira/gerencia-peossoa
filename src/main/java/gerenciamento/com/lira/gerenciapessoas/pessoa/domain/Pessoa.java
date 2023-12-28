@@ -1,4 +1,4 @@
-package gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.response.domain;
+package gerenciamento.com.lira.gerenciapessoas.pessoa.domain;
 
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.application.api.request.PessoaPatchRequest;
