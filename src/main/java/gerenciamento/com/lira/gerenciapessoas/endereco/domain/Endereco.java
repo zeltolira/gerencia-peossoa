@@ -112,7 +112,7 @@ public class Endereco {
         }
     }
 
-    public void setStatusPrincipal(Pessoa pessoa, Endereco endereco, EnderecoRepository enderecoRepository) {
+    public void setStatusPrincipal(Pessoa pessoa, EnderecoRepository enderecoRepository) {
         pessoa.getEndereco().forEach(outroEndereco -> verificaSePrincipal(outroEndereco, enderecoRepository));
         this.status = Status.PRINCIPAL;
     }
