@@ -3,6 +3,7 @@ package gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Status;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.Value;
 
@@ -17,11 +18,13 @@ public class EnderecoListResponse {
     private UUID idEndereco;
     private String cep;
     private String logradouro;
-    private String cidade;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
     private String numero;
 
     private Status status;
-//    private boolean principal;
 
     public static List<EnderecoListResponse> converte(List<Endereco> endereco) {
         return endereco.stream()
@@ -33,7 +36,10 @@ public class EnderecoListResponse {
         this.idEndereco = endereco.getIdEndereco();
         this.cep = endereco.getCep();
         this.logradouro = endereco.getLogradouro();
-        this.cidade = endereco.getCidade();
+        this.complemento = endereco.getComplemento();
+        this.bairro = endereco.getBairro();
+        this.localidade = endereco.getLocalidade();
+        this.uf = endereco.getUf();
         this.numero = endereco.getNumero();
         this.status = endereco.getStatus();
     }

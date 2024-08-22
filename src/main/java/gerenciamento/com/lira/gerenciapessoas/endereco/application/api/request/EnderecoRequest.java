@@ -12,7 +12,10 @@ public class EnderecoRequest {
     private UUID idPessoa;
     private String cep;
     private String logradouro;
-    private String cidade;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
     private String numero;
     private Status status;
 

@@ -1,5 +1,7 @@
 package gerenciamento.com.lira.gerenciapessoas.endereco.application.service;
 
+import com.google.gson.Gson;
+import gerenciamento.com.lira.gerenciapessoas.config.GsonConfig;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoPatchRequest;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.EnderecoRequest;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoDetalhadoResponse;
@@ -7,12 +9,19 @@ import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoResponse;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.repository.EnderecoRepository;
 import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
+import gerenciamento.com.lira.gerenciapessoas.handler.APIException;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.application.repository.PessoaRepository;
 import gerenciamento.com.lira.gerenciapessoas.pessoa.domain.Pessoa;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,8 +74,26 @@ public class EnderecoApplicationService implements EnderecoService {
         log.info("[start] EnderecoApplicationService - setPrincipal");
         Pessoa pessoa = pessoaRepository.getPessoaById(idPessoa);
         Endereco endereco = enderecoRepository.getEnderecoById(idEndereco);
-        endereco.setStatusPrincipal(pessoa, enderecoRepository);
+        endereco.changeStatusToMain(pessoa, enderecoRepository);
         enderecoRepository.saveEndereco(endereco);
         log.info("[finish] EnderecoApplicationService - setPrincipal");
+    }
+
+    @Override
+    public Endereco buscaEnderecoPorCep(String cep) throws APIException, IOException {
+        log.info("[start] EnderecoApplicationService - buscaEnderecoPorCep");
+        URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
+        URLConnection connection = url.openConnection();
+        try (InputStream is = connection.getInputStream();
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "UTF-8"))) {
+            StringBuilder jsonCep = new StringBuilder();
+            String linha;
+            while ((linha = bufferedReader.readLine()) != null) {
+                jsonCep.append(linha);
+            }
+            Gson gson = GsonConfig.getGson();
+            log.info("[finish] EnderecoApplicationService - buscaEnderecoPorCep");
+            return gson.fromJson(jsonCep.toString(), Endereco.class);
+        }
     }
 }

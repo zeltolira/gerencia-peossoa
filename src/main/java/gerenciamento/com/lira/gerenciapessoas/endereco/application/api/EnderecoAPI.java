@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +19,7 @@ import java.util.UUID;
 public interface EnderecoAPI {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    EnderecoResponse postEndereco(@PathVariable UUID idPessoa, @Valid @RequestBody EnderecoRequest enderecoRequest);
+    EnderecoResponse postEndereco(@PathVariable UUID idPessoa, @Valid @RequestBody EnderecoRequest enderecoRequest) throws IOException;
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)

@@ -19,22 +19,27 @@ public class EnderecoResponse {
     @Setter
     private String logradouro;
     @Setter
-    private String cidade;
+    private String complemento;
+    @Setter
+    private String bairro;
+    @Setter
+    private String localidade;
+    @Setter
+    private String uf;
     @Setter
     private String numero;
     private Status status;
-//    @Setter
-//    private boolean principal;
 
     public EnderecoResponse(Endereco endereco) {
         this.idEndereco = endereco.getIdEndereco();
         this.cep = endereco.getCep();
         this.logradouro = endereco.getLogradouro();
-        this.cidade = endereco.getCidade();
+        this.complemento = endereco.getComplemento();
+        this.bairro = endereco.getBairro();
+        this.localidade = endereco.getLocalidade();
+        this.uf = endereco.getUf();
         this.numero = endereco.getNumero();
         this.status = endereco.getStatus();
-//        this.status = endereco.getStatus();
-//        this.principal = endereco.isPrincipal();
     }
 
     public static List<EnderecoResponse> converte(List<Endereco> endereco) {
@@ -47,7 +52,10 @@ public class EnderecoResponse {
         EnderecoResponse enderecoResponse = new EnderecoResponse(endereco);
         enderecoResponse.setCep(endereco.getCep());
         enderecoResponse.setLogradouro(endereco.getLogradouro());
-        enderecoResponse.setCidade(endereco.getCidade());
+        enderecoResponse.setComplemento(endereco.getComplemento());
+        enderecoResponse.setBairro(endereco.getBairro());
+        enderecoResponse.setLocalidade(endereco.getLocalidade());
+        enderecoResponse.setUf(endereco.getUf());
         enderecoResponse.setNumero(endereco.getNumero());
         return enderecoResponse;
     }

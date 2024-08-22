@@ -5,7 +5,9 @@ import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.request.E
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoDetalhadoResponse;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoListResponse;
 import gerenciamento.com.lira.gerenciapessoas.endereco.application.api.response.EnderecoResponse;
+import gerenciamento.com.lira.gerenciapessoas.endereco.domain.Endereco;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,4 +17,5 @@ public interface EnderecoService {
     EnderecoDetalhadoResponse getEnderecoByID(UUID idPessoa, UUID idEndereco);
     void patchEndereco(UUID idEndereco, EnderecoPatchRequest enderecoPatchRequest);
     void setPrincipal(UUID idPessoa, UUID idEndereco);
+    Endereco buscaEnderecoPorCep(String cep) throws IOException;
 }

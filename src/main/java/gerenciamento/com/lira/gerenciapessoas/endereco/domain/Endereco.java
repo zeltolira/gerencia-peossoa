@@ -25,10 +25,12 @@ public class Endereco {
     @NotNull
     private String cep;
     private String logradouro;
-    private String cidade;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
     private String numero;
     private Status status;
-
     private LocalDateTime dataHoraCadastro;
     private LocalDateTime dataHoraUltimaAlteracao;
 
@@ -40,26 +42,29 @@ public class Endereco {
     public Endereco(Pessoa pessoa, EnderecoRequest enderecoRequest) {
         this.cep = enderecoRequest.getCep();
         this.logradouro = enderecoRequest.getLogradouro();
-        this.cidade = enderecoRequest.getCidade();
+        this.complemento = enderecoRequest.getComplemento();
+        this.bairro = enderecoRequest.getBairro();
+        this.localidade = enderecoRequest.getLocalidade();
+        this.uf = enderecoRequest.getUf();
         this.numero = enderecoRequest.getNumero();
         this.status = enderecoRequest.getStatus();
         this.pessoa = pessoa;
         this.dataHoraCadastro = LocalDateTime.now();
-        validarEndereco(enderecoRequest);
+        validateAddress(enderecoRequest);
     }
 
-    private void validarEndereco(EnderecoRequest enderecoRequest) {
-        validaPrincipal();
-        if (enderecoJaCadastrado(pessoa, enderecoRequest)) {
+    private void validateAddress(EnderecoRequest enderecoRequest) {
+        validIfMain();
+        if (addressRegistered(pessoa, enderecoRequest)) {
             throw new RuntimeException("Endereço já cadastrado para esta pessoa.");
         }
 
     }
 
-    private boolean enderecoJaCadastrado(Pessoa pessoa, EnderecoRequest enderecoRequest) {
+    private boolean addressRegistered(Pessoa pessoa, EnderecoRequest enderecoRequest) {
         List<Endereco> enderecosCadastrados = pessoa.getEndereco();
         for (Endereco endereco : enderecosCadastrados) {
-            if (saoEnderecosIguais(endereco, enderecoRequest)) {
+            if (sameEddress(endereco, enderecoRequest)) {
                 return true;
             }
         }
@@ -67,53 +72,56 @@ public class Endereco {
 
     }
 
-    private boolean saoEnderecosIguais(Endereco endereco, EnderecoRequest enderecoRequest) {
+    private boolean sameEddress(Endereco endereco, EnderecoRequest enderecoRequest) {
         return endereco.getCep().equals(enderecoRequest.getCep())
                 && endereco.getNumero().equals(enderecoRequest.getNumero());
     }
-    private boolean isNovoEnderecoPrincipal(Pessoa pessoa) {
+    private boolean isNewMain(Pessoa pessoa) {
         for (Endereco endereco : pessoa.getEndereco()) {
-            if (endereco.isPrincipal()) {
+            if (endereco.isMain()) {
                 return false;
             }
         }
         return true;
     }
 
-    private void validaPrincipal(){
-        if (isNovoEnderecoPrincipal(pessoa)) {
+    private void validIfMain(){
+        if (isNewMain(pessoa)) {
             this.status = Status.PRINCIPAL;
         } else {
             this.status = Status.SECUNDARIO;
         }
     }
 
-    private boolean isPrincipal() {
+    private boolean isMain() {
         return this.status == Status.PRINCIPAL;
     }
 
     public void patch(EnderecoPatchRequest enderecoRequest) {
         this.cep = enderecoRequest.getCep();
         this.logradouro = enderecoRequest.getLogradouro();
-        this.cidade = enderecoRequest.getCidade();
+        this.complemento = enderecoRequest.getComplemento();
+        this.bairro = enderecoRequest.getBairro();
+        this.localidade = enderecoRequest.getLocalidade();
+        this.uf = enderecoRequest.getUf();
         this.numero = enderecoRequest.getNumero();
         this.status = enderecoRequest.getStatus();
         this.dataHoraUltimaAlteracao = LocalDateTime.now();
     }
 
-    public void setStatusSecundario() {
+    public void changeStatusToSecundary() {
         this.status = Status.SECUNDARIO;
     }
 
-    private void verificaSePrincipal(Endereco outroEndereco, EnderecoRepository enderecoRepository) {
+    private void checkIfMain(Endereco outroEndereco, EnderecoRepository enderecoRepository) {
         if (!outroEndereco.equals(this)) {
-            outroEndereco.setStatusSecundario();
+            outroEndereco.changeStatusToSecundary();
             enderecoRepository.saveEndereco(outroEndereco);
         }
     }
 
-    public void setStatusPrincipal(Pessoa pessoa, EnderecoRepository enderecoRepository) {
-        pessoa.getEndereco().forEach(outroEndereco -> verificaSePrincipal(outroEndereco, enderecoRepository));
+    public void changeStatusToMain(Pessoa pessoa, EnderecoRepository enderecoRepository) {
+        pessoa.getEndereco().forEach(outroEndereco -> checkIfMain(outroEndereco, enderecoRepository));
         this.status = Status.PRINCIPAL;
     }
 }
